@@ -1,0 +1,153 @@
+/* Назначение файла: глобальные стили и базовая визуальная система лендинга. */
+/* Описание: содержит Tailwind-слои, CSS-переменные, шум, фоновые эффекты и анимационные утилиты. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #fefdf8;
+  --primary-yellow: #ffd413;
+  --accent-teal: #393ee4;
+  --accent-sky: #286edf;
+  --ink: #2b2b2b;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background:
+      radial-gradient(circle at top left, rgba(255, 212, 19, 0.3), transparent 34%),
+      radial-gradient(circle at 68% 14%, rgba(255, 212, 19, 0.2), transparent 32%),
+      radial-gradient(circle at top right, rgba(40, 110, 223, 0.18), transparent 30%),
+      linear-gradient(180deg, #fff7c8 0%, #fff8d7 38%, #fffdf3 100%);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  ::selection {
+    background: rgba(57, 62, 228, 0.2);
+  }
+}
+
+@layer components {
+  .noise-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+
+  .hero-wave {
+    position: absolute;
+    inset: auto -10% -18% auto;
+    width: 44rem;
+    height: 44rem;
+    border-radius: 9999px;
+    background:
+      radial-gradient(circle, rgba(40, 110, 223, 0.36) 0%, rgba(57, 62, 228, 0.18) 38%, transparent 72%);
+    filter: blur(10px);
+  }
+
+  .glass-panel {
+    background: rgba(255, 252, 239, 0.78);
+    backdrop-filter: blur(18px);
+  }
+
+  .service-card-grid {
+    background-image:
+      linear-gradient(rgba(57, 62, 228, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(57, 62, 228, 0.08) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .teal-ring {
+    box-shadow: 0 0 0 1px rgba(57, 62, 228, 0.16), 0 24px 60px rgba(40, 110, 223, 0.18);
+  }
+
+  .hero-sun-orbit {
+    position: relative;
+    display: flex;
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    max-width: 28rem;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 9999px;
+    border: none;
+    background:
+      radial-gradient(circle at 50% 42%, rgba(255, 212, 19, 0.55) 0%, rgba(255, 239, 163, 0.95) 44%, rgba(219, 236, 255, 0.92) 75%, rgba(255, 255, 255, 0.82) 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 24px 60px rgba(40, 110, 223, 0.12);
+    /* Мягко размываем границу окружности через mask-image */
+    -webkit-mask-image: radial-gradient(circle, black 58%, transparent 72%);
+    mask-image: radial-gradient(circle, black 58%, transparent 72%);
+  }
+
+  .hero-sun-orbit::before {
+    content: "";
+    position: absolute;
+    inset: 9%;
+    border-radius: 9999px;
+    background: radial-gradient(circle, rgba(255, 212, 19, 0.24) 0%, rgba(255, 255, 255, 0) 68%);
+  }
+
+  .hero-sun-orbit::after {
+    content: "";
+    position: absolute;
+    inset: -12%;
+    border-radius: 9999px;
+    background: radial-gradient(circle, rgba(40, 110, 223, 0.1) 0%, rgba(40, 110, 223, 0) 58%);
+    filter: blur(16px);
+  }
+
+  .hero-sun-video {
+    position: relative;
+    z-index: 2;
+    /* Видео 16:9, а контейнер квадратный — увеличиваем ширину, чтобы высота заполнила круг */
+    width: 178%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: 9999px;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Скрываем скроллбар для каруселей, сохраняя возможность прокрутки */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
