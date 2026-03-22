@@ -2,6 +2,8 @@
 // Описание: описывает базовые URL проекта для SEO и индексации.
 import type { MetadataRoute } from "next";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://annakorzhova.ru";
 

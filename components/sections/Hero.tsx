@@ -6,6 +6,7 @@ import { useEffect, useRef } from "react";
 
 import Link from "next/link";
 
+import { withBasePath } from "@/lib/base-path";
 import { gsap } from "@/lib/gsap";
 
 import { designTokens } from "@/src/lib/design-tokens";
@@ -120,7 +121,7 @@ export function Hero() {
               <div className="hero-sun-orbit mx-auto">
                 <video
                   className="hero-sun-video"
-                  src="/api/brand-video"
+                  src={withBasePath("/video.mp4")}
                   autoPlay
                   loop
                   muted
