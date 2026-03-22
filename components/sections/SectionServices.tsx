@@ -9,7 +9,20 @@ import { designTokens } from "@/src/lib/design-tokens";
 
 export function SectionServices() {
   const [cases, setCases] = useState(() => [...designTokens.correctionCases]);
+  const [ladderLayout, setLadderLayout] = useState(false);
   const palette = designTokens.palette;
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 1279px)");
+    const sync = () => {
+      setLadderLayout(mq.matches);
+    };
+    sync();
+    mq.addEventListener("change", sync);
+    return () => {
+      mq.removeEventListener("change", sync);
+    };
+  }, []);
 
   useEffect(() => {
     // Вертикальная ротация карточек повторяет логику из ТЗ: unshift(pop()).
@@ -35,26 +48,18 @@ export function SectionServices() {
   const correctionCards = useMemo(
     () =>
       cases.map((item, index) => {
-        const positions = [
-          {
-            translateY: 0,
-            scale: 1,
-            opacity: 1,
-            zIndex: 30,
-          },
-          {
-            translateY: 18,
-            scale: 0.95,
-            opacity: 0.82,
-            zIndex: 20,
-          },
-          {
-            translateY: 36,
-            scale: 0.9,
-            opacity: 0.64,
-            zIndex: 10,
-          },
-        ] as const;
+        // На ширине < xl — «лесенка»: смещение вниз и вправо, нижние карточки слегка видны.
+        const positions = ladderLayout
+          ? ([
+              { translateX: 0, translateY: 0, scale: 1, opacity: 1, zIndex: 30 },
+              { translateX: 8, translateY: 16, scale: 0.97, opacity: 0.88, zIndex: 20 },
+              { translateX: 16, translateY: 32, scale: 0.93, opacity: 0.74, zIndex: 10 },
+            ] as const)
+          : ([
+              { translateX: 0, translateY: 0, scale: 1, opacity: 1, zIndex: 30 },
+              { translateX: 0, translateY: 18, scale: 0.95, opacity: 0.82, zIndex: 20 },
+              { translateX: 0, translateY: 36, scale: 0.9, opacity: 0.64, zIndex: 10 },
+            ] as const);
 
         const position = positions[index] ?? positions[2];
 
@@ -63,7 +68,7 @@ export function SectionServices() {
           position,
         };
       }),
-    [cases],
+    [cases, ladderLayout],
   );
 
   return (
@@ -116,14 +121,17 @@ export function SectionServices() {
               </div>
             </div>
 
-            <div className="relative h-[21rem] overflow-hidden rounded-[1.6rem] p-5" style={{ background: `linear-gradient(180deg, ${palette.sky}1F, ${palette.yellow}26)` }}>
+            <div
+              className="relative isolate h-[31rem] overflow-hidden rounded-[1.6rem] p-5 xl:h-[22rem]"
+              style={{ background: `linear-gradient(180deg, ${palette.sky}1F, ${palette.yellow}26)` }}
+            >
               {/* Карточки наслаиваются и переставляются с spring-подобной кривой перехода. */}
               {correctionCards.map((item) => (
                 <div
                   key={item.label}
                   className="absolute left-5 right-5 rounded-[1.45rem] border border-white/90 bg-white p-5 shadow-soft transition-all duration-700"
                   style={{
-                    transform: `translateY(${item.position.translateY}px) scale(${item.position.scale})`,
+                    transform: `translate(${item.position.translateX}px, ${item.position.translateY}px) scale(${item.position.scale})`,
                     opacity: item.position.opacity,
                     zIndex: item.position.zIndex,
                     transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)",

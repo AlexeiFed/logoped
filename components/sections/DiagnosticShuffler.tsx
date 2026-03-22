@@ -96,7 +96,7 @@ export function DiagnosticShuffler() {
             Быстрая первичная оценка артикуляции, фонематического слуха и готовности к коррекционной работе.
           </p>
           {/* Имитация панели диагностики поддерживает ощущение экспертного интерфейса. */}
-          <div className="grid grid-cols-6 gap-2">
+          <div className="grid h-[50px] grid-cols-6 gap-2 overflow-hidden">
             {Array.from({ length: 18 }).map((_, index) => (
               <div
                 key={`chart-line-${index}`}

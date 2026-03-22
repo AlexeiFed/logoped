@@ -7,6 +7,7 @@ import { useCallback, useEffect, useRef } from "react";
 
 import Image from "next/image";
 
+import { withBasePath } from "@/lib/base-path";
 import { designTokens } from "@/src/lib/design-tokens";
 
 export function Testimonials() {
@@ -97,7 +98,7 @@ export function Testimonials() {
       <div className="mt-8" style={{ backgroundColor: palette.background }}>
         <div
           ref={trackRef}
-          className="scrollbar-hide flex cursor-grab gap-5 overflow-x-auto px-4"
+          className="scrollbar-hide flex cursor-grab gap-2 overflow-x-auto px-4 pb-0 sm:gap-3 sm:px-6 lg:px-8"
           style={{ scrollSnapType: "x mandatory" }}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
@@ -116,7 +117,7 @@ export function Testimonials() {
               >
                 {/* Скриншот: в исходнике снизу часто чёрная полоса (системная зона) — origin-top + scale обрезаем низ */}
                 <Image
-                  src={item.src}
+                  src={withBasePath(item.src)}
                   alt={item.alt}
                   fill
                   className="origin-top scale-[1.08] object-cover object-left object-top sm:scale-[1.06]"

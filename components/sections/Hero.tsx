@@ -49,7 +49,7 @@ export function Hero() {
     <section
       ref={sectionRef}
       id="hero"
-      className="relative flex min-h-[100dvh] items-center px-4 pb-12 pt-24 sm:px-6 lg:px-8"
+      className="relative flex min-h-[100dvh] items-center px-4 pb-12 pt-[9.5rem] sm:px-6 sm:pt-28 lg:px-8 lg:pt-24"
     >
       <div className="hero-wave" aria-hidden="true" />
       <div className="mx-auto grid w-full max-w-7xl gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
@@ -67,7 +67,7 @@ export function Hero() {
             data-hero-reveal
             className="mt-6 font-accent text-[clamp(3rem,9vw,6.8rem)] leading-[0.92] tracking-[-0.06em] text-balance"
           >
-            <span style={{ color: palette.yellow }}>{hero.titleTop}</span>
+            <span style={{ color: palette.yellowHeading }}>{hero.titleTop}</span>
             <br />
             <span style={{ color: palette.teal }}>{hero.titleBottom}</span>
           </h1>
@@ -82,7 +82,8 @@ export function Hero() {
 
           <div data-hero-reveal className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
-              href="#services"
+              prefetch={false}
+              href="/#footer-cta"
               className="inline-flex items-center justify-center rounded-full px-6 py-3.5 font-semibold text-white shadow-soft transition-transform duration-300 hover:-translate-y-0.5"
               style={{ backgroundColor: palette.teal }}
             >

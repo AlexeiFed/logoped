@@ -1,7 +1,9 @@
 // Назначение файла: финальный CTA-футер лендинга Анны Коржовой.
-// Описание: завершает страницу явным действием и контактным блоком для записи.
+// Описание: запись через MAX, телефон, ссылка на политику cookies.
 import Link from "next/link";
 
+import { PhoneIcon } from "@/components/icons/PhoneIcon";
+import { withBasePath } from "@/lib/base-path";
 import { designTokens } from "@/src/lib/design-tokens";
 
 export function FooterCta() {
@@ -20,24 +22,36 @@ export function FooterCta() {
               {footer.title}
             </h2>
             <p className="mt-4 max-w-2xl text-lg leading-8 text-ink/76">{footer.description}</p>
+            <p className="mt-3 max-w-2xl font-medium leading-7 text-ink/88">{footer.bookingHint}</p>
           </div>
 
-          <div className="grid gap-4 rounded-[2rem] bg-white/72 p-5 shadow-soft backdrop-blur-sm">
-            <Link
-              href="#hero"
+          <div className="grid gap-3 rounded-[2rem] bg-white/72 p-5 shadow-soft backdrop-blur-sm">
+            <a
+              href={footer.maxChatUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-full px-6 py-3.5 text-base font-semibold text-white transition-transform duration-300 hover:-translate-y-0.5"
               style={{ backgroundColor: palette.teal }}
             >
               {footer.cta}
-            </Link>
+            </a>
+            <a
+              href={`tel:${footer.phoneTel}`}
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-ink/10 bg-white/90 px-6 py-3.5 text-base font-semibold text-ink transition-opacity hover:opacity-90"
+            >
+              <span style={{ color: palette.teal }}>
+                <PhoneIcon className="size-5 shrink-0" />
+              </span>
+              {footer.phoneDisplay}
+            </a>
 
-            <div className="grid gap-2 text-sm text-ink/80">
+            <div className="grid gap-2 border-t border-ink/10 pt-3 text-sm text-ink/80">
               {footer.contacts.map((contact) => (
                 <p key={contact}>{contact}</p>
               ))}
               <p className="pt-1">
                 <Link
-                  href="/cookies"
+                  href={withBasePath("/cookies")}
                   className="font-medium underline underline-offset-2 transition-opacity hover:opacity-80"
                   style={{ color: palette.sky }}
                 >

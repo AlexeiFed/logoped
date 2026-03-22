@@ -3,6 +3,7 @@
 import type { Metadata } from "next";
 
 import { Navbar } from "@/components/sections/Navbar";
+import { withBasePath } from "@/lib/base-path";
 import { designTokens } from "@/src/lib/design-tokens";
 
 export const metadata: Metadata = {
@@ -35,7 +36,7 @@ export default function CookiesPage() {
         <p className="mt-12">
           {/* Нативная навигация: в dev иногда ломается клиентский переход по Link (битый chunk *.js в .next). */}
           <a
-            href="/"
+            href={withBasePath("/")}
             className="inline-flex items-center rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-transform duration-300 hover:-translate-y-0.5"
             style={{ backgroundColor: palette.teal }}
           >
