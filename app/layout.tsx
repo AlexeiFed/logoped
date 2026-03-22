@@ -8,6 +8,10 @@ import { CookieBanner } from "@/components/CookieBanner";
 
 import "./globals.css";
 
+// Абсолютный URL превью для OG/Telegram; на GitHub Pages задаётся NEXT_PUBLIC_SITE_URL в CI.
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://annakorzhova.ru").replace(/\/$/, "");
+const ogImageUrl = `${siteUrl}/images/og-hero.jpg`;
+
 const dmSans = Manrope({
   variable: "--font-dm-sans",
   subsets: ["latin", "cyrillic"],
@@ -27,13 +31,21 @@ export const metadata: Metadata = {
   title: "Анна Коржова — логопед высшей категории",
   description:
     "Премиальный лендинг логопеда Анны Коржовой: диагностика речи, коррекция звуков и подготовка к школе.",
-  metadataBase: new URL("https://annakorzhova.ru"),
+  metadataBase: new URL(`${siteUrl}/`),
   openGraph: {
     title: "Анна Коржова — логопед высшей категории",
     description:
       "Диагностика речи, коррекция звуков и подготовка к школе с тёплым и системным подходом.",
     type: "website",
     locale: "ru_RU",
+    images: [{ url: ogImageUrl, width: 827, height: 1024, alt: "Карточка героя: формат работы и тон коммуникации" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Анна Коржова — логопед высшей категории",
+    description:
+      "Диагностика речи, коррекция звуков и подготовка к школе с тёплым и системным подходом.",
+    images: [ogImageUrl],
   },
 };
 

@@ -31,6 +31,8 @@ jobs:
         env:
           GITHUB_PAGES: "true"
           NEXT_PUBLIC_BASE_PATH: "/logoped"
+          # Абсолютные og:image и metadataBase для превью ссылок (Telegram и т.д.)
+          NEXT_PUBLIC_SITE_URL: https://${{ github.repository_owner }}.github.io/logoped
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out
