@@ -82,7 +82,7 @@ export function SectionServices() {
             Специалистический дашборд услуг
           </h2>
           <p className="mt-4 text-lg leading-8 text-ink/72">
-            Три базовых направления, собранные как понятная система: сначала точная диагностика, затем коррекция и мягкая подготовка к школе.
+            Четыре направления, собранные в понятную систему: диагностика, коррекция звуков, подготовка к школе и логопедический массаж.
           </p>
         </div>
 
@@ -215,6 +215,43 @@ export function SectionServices() {
               <p className="text-sm leading-6 text-white/84">
                 Развиваем слух, внимание, понимание инструкции и базу для уверенного старта в школе — без жёсткого давления.
               </p>
+            </div>
+          </article>
+          {/* 04 — Логопедический массаж: занимает всю ширину грида на xl */}
+          <article className="rounded-[1.9rem] border border-white/80 bg-white/82 p-5 shadow-warm backdrop-blur xl:col-span-3">
+            <div className="mb-5 flex items-center justify-between gap-3">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.24em]" style={{ color: palette.sky }}>
+                  04
+                </p>
+                <h3 className="mt-2 text-2xl font-bold tracking-tight text-ink">Логопедический массаж</h3>
+              </div>
+              <div
+                className="rounded-full px-3 py-2 text-xs font-semibold text-white"
+                style={{ backgroundColor: palette.teal }}
+              >
+                Подготовка
+              </div>
+            </div>
+
+            <div
+              className="grid gap-4 rounded-[1.6rem] p-5 sm:grid-cols-3"
+              style={{ background: `linear-gradient(135deg, ${palette.sky}1F, ${palette.yellow}26)` }}
+            >
+              {designTokens.massageBenefits.map((benefit, index) => (
+                <div
+                  key={benefit}
+                  className="rounded-[1.45rem] border border-white/90 bg-white p-5 shadow-soft"
+                >
+                  <p
+                    className="mb-3 text-xs font-semibold uppercase tracking-[0.24em]"
+                    style={{ color: palette.teal }}
+                  >
+                    0{index + 1}
+                  </p>
+                  <p className="text-sm leading-6 text-ink/82">{benefit}</p>
+                </div>
+              ))}
             </div>
           </article>
         </div>
