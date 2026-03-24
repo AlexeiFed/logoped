@@ -18,7 +18,7 @@ export function FooterCta() {
               <span className="inline-flex size-2.5 rounded-full" style={{ backgroundColor: palette.sky }} />
               <span>{brand.schedule}</span>
             </div>
-            <h2 className="mt-5 max-w-3xl font-accent text-[clamp(2.2rem,5vw,4.4rem)] leading-[0.96] tracking-[-0.05em]">
+            <h2 className="mt-5 max-w-3xl font-accent text-[clamp(2.2rem,5vw,4.4rem)] leading-[0.96] tracking-[-0.02em]">
               {footer.title}
             </h2>
             <p className="mt-4 max-w-2xl text-lg leading-8 text-ink/76">{footer.description}</p>

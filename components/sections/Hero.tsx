@@ -4,6 +4,7 @@
 
 import { useEffect, useRef } from "react";
 
+import Image from "next/image";
 import Link from "next/link";
 
 import { withBasePath } from "@/lib/base-path";
@@ -59,13 +60,22 @@ export function Hero() {
             className="glass-panel inline-flex items-center gap-3 rounded-full border px-4 py-2 text-sm font-medium text-ink/72 shadow-soft"
             style={{ borderColor: `${palette.teal}26` }}
           >
-            <span className="inline-flex size-2.5 rounded-full" style={{ backgroundColor: palette.teal }} />
+            <Image
+              src={withBasePath("/images/sun-emblem.png")}
+              alt="Логотип Солнышко"
+              width={24}
+              height={24}
+              className="size-6 rounded-full"
+              priority
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
+            />
             <span>{hero.eyebrow}</span>
           </div>
 
           <h1
             data-hero-reveal
-            className="mt-6 font-accent text-[clamp(3rem,9vw,6.8rem)] leading-[0.92] tracking-[-0.06em] text-balance"
+            className="mt-6 font-accent text-[clamp(3rem,9vw,6.8rem)] leading-[0.92] tracking-[-0.02em] text-balance"
           >
             <span style={{ color: palette.yellowHeading }}>{hero.titleTop}</span>
             <br />

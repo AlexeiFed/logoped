@@ -51,7 +51,7 @@ export function Philosophy() {
           </p>
           <h2
             data-philosophy-reveal
-            className="mt-4 max-w-3xl font-accent text-[clamp(2.2rem,4.6vw,4.1rem)] leading-[0.96] tracking-[-0.05em]"
+            className="mt-4 max-w-3xl font-accent text-[clamp(2.2rem,4.6vw,4.1rem)] leading-[0.96] tracking-[-0.02em]"
           >
             {philosophy.title}
           </h2>
@@ -73,10 +73,10 @@ export function Philosophy() {
             <div
               key={stat.label}
               data-philosophy-reveal
-              className={`rounded-[1.65rem] p-5 shadow-soft ${index === 0 ? "bg-yellow text-ink" : "bg-white text-ink"}`}
+              className={`rounded-[2rem] p-5 shadow-soft ${index === 0 ? "bg-yellow text-ink" : "bg-white text-ink"}`}
             >
               <p className="text-sm font-semibold uppercase tracking-[0.24em] text-current/60">{stat.label}</p>
-              <p className="mt-3 text-5xl font-accent leading-none tracking-[-0.06em]">{stat.value}</p>
+              <p className="mt-3 text-5xl font-accent leading-none tracking-[-0.02em]">{stat.value}</p>
             </div>
           ))}
         </div>

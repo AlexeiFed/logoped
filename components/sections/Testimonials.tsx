@@ -85,7 +85,7 @@ export function Testimonials() {
           >
             {testimonials.eyebrow}
           </p>
-          <h2 className="mt-4 font-accent text-[clamp(2.2rem,5vw,4.25rem)] leading-[0.96] tracking-[-0.05em] text-ink">
+          <h2 className="mt-4 font-accent text-[clamp(2.2rem,5vw,4.25rem)] leading-[0.96] tracking-[-0.02em] text-ink">
             {testimonials.title}
           </h2>
           <p className="mt-4 text-lg leading-8 text-ink/72">
@@ -112,16 +112,22 @@ export function Testimonials() {
               style={{ scrollSnapAlign: "start" }}
             >
               <div
-                className="relative h-[28rem] w-[18rem] overflow-hidden rounded-[1.6rem] shadow-soft sm:h-[32rem] sm:w-[20rem]"
+                className="relative h-[28rem] w-[18rem] overflow-hidden rounded-[2rem] shadow-soft sm:h-[32rem] sm:w-[20rem]"
                 style={{ backgroundColor: palette.background }}
               >
                 {/* Скриншот: в исходнике снизу часто чёрная полоса (системная зона) — origin-top + scale обрезаем низ */}
+                {/* Первые 2 изображения — priority для LCP, blur placeholder для premium UX */}
                 <Image
                   src={withBasePath(item.src)}
                   alt={item.alt}
                   fill
                   className="origin-top scale-[1.08] object-cover object-left object-top sm:scale-[1.06]"
                   sizes="(max-width: 640px) 18rem, 20rem"
+                  {...(index < 2 && {
+                    priority: true,
+                    placeholder: "blur" as const,
+                    blurDataURL: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==",
+                  })}
                 />
               </div>
             </div>

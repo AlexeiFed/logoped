@@ -4,9 +4,11 @@
 
 import { useEffect, useState } from "react";
 
+import Image from "next/image";
 import Link from "next/link";
 
 import { PhoneIcon } from "@/components/icons/PhoneIcon";
+import { withBasePath } from "@/lib/base-path";
 import { designTokens } from "@/src/lib/design-tokens";
 
 export function Navbar() {
@@ -37,8 +39,17 @@ export function Navbar() {
         }`}
         style={isScrolled ? { borderColor: `${palette.teal}26` } : undefined}
       >
-        <Link prefetch={false} href="/#hero" className="flex items-center gap-3 rounded-full px-3 py-2 text-sm font-semibold text-ink">
-          <span className="inline-flex size-2.5 rounded-full" style={{ backgroundColor: palette.teal }} />
+        <Link prefetch={false} href="/#hero" className="flex items-center gap-2.5 rounded-full px-3 py-2 text-sm font-semibold text-ink">
+          <Image
+            src={withBasePath("/images/sun-emblem.png")}
+            alt="Логотип Солнышко"
+            width={28}
+            height={28}
+            className="size-7 rounded-full"
+            priority
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
+          />
           <span>{designTokens.brand.name}</span>
         </Link>
 
