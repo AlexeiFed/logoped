@@ -1,5 +1,5 @@
-// Назначение файла: секция услуг лендинга Анны Коржовой.
-// Описание: показывает диагностику, коррекцию звуков и подготовку к школе в формате премиальных карточек.
+// Назначение файла: секция направлений профессиональной помощи лендинга Анны Коржовой.
+// Описание: диагностика, коррекция, подготовка к школе, логопедический массаж + чипы целевой аудитории.
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
@@ -74,16 +74,35 @@ export function SectionServices() {
   return (
     <section id="services" className="px-4 pb-24 pt-10 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
+        {/* Заголовок секции + чипы «Кому я помогаю» */}
         <div className="mb-10 max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.26em]" style={{ color: palette.sky }}>
-            Услуги
+            {designTokens.services.eyebrow}
           </p>
           <h2 className="mt-4 font-accent text-[clamp(2.3rem,5vw,4.25rem)] leading-[0.96] tracking-[-0.05em] text-ink">
-            Специалистический дашборд услуг
+            {designTokens.services.title}
           </h2>
           <p className="mt-4 text-lg leading-8 text-ink/72">
-            Четыре направления, собранные в понятную систему: диагностика, коррекция звуков, подготовка к школе и логопедический массаж.
+            {designTokens.services.subtitle}
           </p>
+
+          {/* Чипы целевой аудитории */}
+          <div className="mt-6">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em]" style={{ color: palette.teal }}>
+              Кому я помогаю
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {designTokens.targetAudience.map((audience) => (
+                <span
+                  key={audience}
+                  className="inline-flex rounded-full border px-4 py-2 text-sm font-medium text-ink/80"
+                  style={{ borderColor: `${palette.teal}26`, backgroundColor: `${palette.white}CC` }}
+                >
+                  {audience}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
 
         <div className="grid gap-6 xl:grid-cols-3">
@@ -102,6 +121,9 @@ export function SectionServices() {
                 Точка входа
               </div>
             </div>
+            <p className="mb-4 text-sm leading-6 text-ink/72">
+              {designTokens.diagnosticsDescription}
+            </p>
             <DiagnosticShuffler />
           </article>
 
@@ -155,7 +177,7 @@ export function SectionServices() {
                     </div>
                   </div>
                   <p className="mt-5 text-sm leading-6 text-ink/72">
-                    Постепенно фиксируем правильную артикуляцию и переносим результат в спонтанную речь.
+                    {item.description}
                   </p>
                 </div>
               ))}
@@ -217,22 +239,29 @@ export function SectionServices() {
               </p>
             </div>
           </article>
-          {/* 04 — Логопедический массаж: занимает всю ширину грида на xl */}
+          {/* 04 — Логопедический массаж: premium-карточка на всю ширину грида */}
           <article className="rounded-[1.9rem] border border-white/80 bg-white/82 p-5 shadow-warm backdrop-blur xl:col-span-3">
             <div className="mb-5 flex items-center justify-between gap-3">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.24em]" style={{ color: palette.sky }}>
                   04
                 </p>
-                <h3 className="mt-2 text-2xl font-bold tracking-tight text-ink">Логопедический массаж</h3>
+                <h3 className="mt-2 text-2xl font-bold tracking-tight text-ink">
+                  {designTokens.massageCard.title}
+                </h3>
               </div>
               <div
                 className="rounded-full px-3 py-2 text-xs font-semibold text-white"
                 style={{ backgroundColor: palette.teal }}
               >
-                Подготовка
+                Premium
               </div>
             </div>
+
+            {/* Описание методики */}
+            <p className="mb-5 max-w-3xl text-base leading-7 text-ink/76">
+              {designTokens.massageCard.description}
+            </p>
 
             <div
               className="grid gap-4 rounded-[1.6rem] p-5 sm:grid-cols-3"
@@ -249,7 +278,7 @@ export function SectionServices() {
                   >
                     0{index + 1}
                   </p>
-                  <p className="text-sm leading-6 text-ink/82">{benefit}</p>
+                  <p className="text-sm font-medium leading-6 text-ink/82">{benefit}</p>
                 </div>
               ))}
             </div>

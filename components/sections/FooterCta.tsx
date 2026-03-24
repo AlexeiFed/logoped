@@ -45,6 +45,14 @@ export function FooterCta() {
               {footer.phoneDisplay}
             </a>
 
+            {/* Рекомендация по графику — рядом с контактными кнопками */}
+            <p
+              className="text-center text-xs font-semibold uppercase tracking-[0.2em]"
+              style={{ color: palette.teal }}
+            >
+              {designTokens.recommendedSchedule}
+            </p>
+
             <div className="grid gap-2 border-t border-ink/10 pt-3 text-sm text-ink/80">
               {footer.contacts.map((contact) => (
                 <p key={contact}>{contact}</p>
