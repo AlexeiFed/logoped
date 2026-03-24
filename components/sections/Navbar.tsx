@@ -13,12 +13,15 @@ import { designTokens } from "@/src/lib/design-tokens";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  // На мобильной версии навбар появляется только после скролла вниз
+  const [isMobileVisible, setIsMobileVisible] = useState(false);
   const { footer, hero, palette } = designTokens;
 
   useEffect(() => {
     // Меняем состояние навбара по скроллу, чтобы он сжимался и становился более glassmorphic.
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 24);
+      setIsMobileVisible(window.scrollY > 80);
     };
 
     handleScroll();
@@ -30,7 +33,11 @@ export function Navbar() {
   }, []);
 
   return (
-    <div className="pointer-events-none fixed inset-x-0 top-4 z-40 px-4 sm:px-6 lg:px-8">
+    <div
+      className={`pointer-events-none fixed inset-x-0 top-4 z-40 px-4 transition-all duration-300 sm:px-6 sm:translate-y-0 sm:opacity-100 lg:px-8 ${
+        isMobileVisible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 sm:translate-y-0 sm:opacity-100"
+      }`}
+    >
       <nav
         className={`pointer-events-auto mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-2 gap-y-2 rounded-full border px-3 py-3 transition-all duration-300 sm:gap-4 sm:px-4 ${
           isScrolled
@@ -82,7 +89,15 @@ export function Navbar() {
             className="rounded-full px-3 py-2 text-xs font-semibold text-white shadow-soft transition-transform duration-300 hover:-translate-y-0.5 sm:px-5 sm:py-2.5 sm:text-sm"
             style={{ backgroundColor: palette.teal }}
           >
-            {hero.ctaPrimary}
+            {/* На мобилке — иконка Max, на sm+ — текст */}
+            <Image
+              src={withBasePath("/images/max-messenger-sign-logo.png")}
+              alt="Написать в MAX"
+              width={22}
+              height={22}
+              className="size-[22px] rounded sm:hidden"
+            />
+            <span className="hidden sm:inline">{hero.ctaPrimary}</span>
           </Link>
         </div>
       </nav>
