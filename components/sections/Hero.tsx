@@ -65,6 +65,7 @@ export function Hero() {
               alt="Логотип Солнышко"
               width={24}
               height={24}
+              sizes="24px"
               className="size-6 rounded-full"
               priority
               placeholder="blur"
@@ -137,6 +138,7 @@ export function Hero() {
                   loop
                   muted
                   playsInline
+                  preload="metadata"
                   aria-label="Анимированная эмблема бренда"
                 />
               </div>

@@ -52,6 +52,7 @@ export function Navbar() {
             alt="Логотип Солнышко"
             width={28}
             height={28}
+            sizes="28px"
             className="size-7 rounded-full"
             priority
             placeholder="blur"
