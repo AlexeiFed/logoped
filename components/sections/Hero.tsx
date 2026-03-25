@@ -108,7 +108,7 @@ export function Hero() {
             </Link>
           </div>
 
-          <div data-hero-reveal className="mt-8 grid gap-3 sm:grid-cols-3">
+          <div data-hero-reveal className="mt-8 grid gap-3 sm:grid-cols-2">
             {hero.trustPoints.map((point) => (
               <div key={point} className="glass-panel rounded-[1.35rem] border border-white/70 p-4 shadow-soft">
                 <p className="text-sm font-medium leading-6 text-ink/80">{point}</p>

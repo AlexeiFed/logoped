@@ -93,7 +93,7 @@ export function DiagnosticShuffler() {
       <div className="grid gap-4 md:grid-cols-[1fr_1.1fr] lg:grid-cols-[1.05fr_1.15fr]">
         <div className="flex min-w-0 flex-col gap-3 rounded-[1.15rem] bg-background py-4 pl-2 pr-3 pt-3 service-card-grid sm:pl-2.5 sm:pr-4 md:gap-3.5 md:pl-2 md:pr-3">
           <p className="max-w-none self-start text-left text-sm leading-relaxed text-ink/72 md:leading-6">
-            Быстрая первичная оценка артикуляции, фонематического слуха и готовности к коррекционной работе.
+            Быстрая первичная оценка. Углубленная дифференциальная диагностика. План коррекции (цель, задачи, воплощение, сроки). 
           </p>
           {/* Имитация панели диагностики поддерживает ощущение экспертного интерфейса. */}
           <div className="grid h-[50px] grid-cols-6 gap-2 overflow-hidden">
@@ -112,7 +112,7 @@ export function DiagnosticShuffler() {
         </div>
 
         <div
-          className="min-w-0 rounded-[1.15rem] px-3 py-5 text-white shadow-warm md:flex md:h-[384px] md:min-h-[384px] md:max-h-[384px] md:flex-col"
+          className="min-w-0 rounded-[1.15rem] px-3 py-5 text-white shadow-warm md:flex md:h-[480px] md:min-h-[480px] md:max-h-[480px] md:flex-col"
           style={{ backgroundColor: palette.teal }}
         >
           <p className="mb-2 shrink-0 text-xs font-semibold uppercase tracking-[0.24em] text-white/70">Сейчас в фокусе</p>

@@ -10,9 +10,6 @@ import { DiagnosticShuffler } from "@/components/sections/DiagnosticShuffler";
 import { gsap } from "@/lib/gsap";
 import { designTokens } from "@/src/lib/design-tokens";
 
-/** Список диагнозов для inline-badge отображения. */
-const DIAGNOSIS_BADGES = ["ЗРР", "ЗПР", "Аутизм", "СД"] as const;
-
 export function SectionServices() {
   const [cases, setCases] = useState(() => [...designTokens.correctionCases]);
   const [ladderLayout, setLadderLayout] = useState(false);
@@ -164,19 +161,6 @@ export function SectionServices() {
           <p ref={audienceTextRef} className="mt-4 text-sm leading-6 text-ink/72">
             {audienceToggle[audience].servicesFocus}
           </p>
-
-          {/* Бейджи диагнозов — inline-block с лёгким teal фоном */}
-          <div className="mt-5 flex flex-wrap gap-2">
-            {DIAGNOSIS_BADGES.map((badge) => (
-              <span
-                key={badge}
-                className="inline-flex rounded-full px-3.5 py-1.5 text-xs font-semibold"
-                style={{ backgroundColor: "#45A9B110", color: palette.teal }}
-              >
-                {badge}
-              </span>
-            ))}
-          </div>
 
           {/* Чипы целевой аудитории */}
           <div className="mt-5">
@@ -370,21 +354,21 @@ export function SectionServices() {
               </p>
 
               <div
-                className="grid gap-4 rounded-[2rem] p-5 sm:grid-cols-3"
+                className="grid gap-4 rounded-[2rem] p-5 sm:grid-cols-2"
                 style={{ background: `linear-gradient(135deg, ${palette.sky}1F, ${palette.yellow}26)` }}
               >
                 {designTokens.massageBenefits.map((benefit, index) => (
                   <div
                     key={benefit}
-                    className="rounded-[2rem] border border-white/90 bg-white p-5 shadow-soft"
+                    className="flex items-baseline gap-3 rounded-[2rem] border border-white/90 bg-white p-5 shadow-soft"
                   >
-                    <p
-                      className="mb-3 text-xs font-semibold uppercase tracking-[0.24em]"
+                    <span
+                      className="shrink-0 text-xs font-semibold uppercase tracking-[0.24em]"
                       style={{ color: palette.teal }}
                     >
                       0{index + 1}
-                    </p>
-                    <p className="text-sm font-medium leading-6 text-ink/82">{benefit}</p>
+                    </span>
+                    <span className="text-sm font-medium leading-6 text-ink/82">{benefit}</span>
                   </div>
                 ))}
               </div>
