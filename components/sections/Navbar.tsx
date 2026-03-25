@@ -39,7 +39,7 @@ export function Navbar() {
       }`}
     >
       <nav
-        className={`pointer-events-auto mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-2 gap-y-2 rounded-full border px-3 py-3 transition-all duration-300 sm:gap-4 sm:px-4 ${
+        className={`pointer-events-auto mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-2 gap-y-2 rounded-full border px-3 py-3 transition-all duration-300 sm:gap-4 sm:px-4 ${
           isScrolled
             ? "bg-background/70 shadow-soft backdrop-blur-xl"
             : "border-white/70 bg-white/65 backdrop-blur-md"

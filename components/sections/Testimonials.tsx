@@ -1,9 +1,6 @@
 // Назначение файла: секция отзывов родителей для лендинга.
-// Описание: горизонтальная карусель скриншотов из мессенджера с drag-скроллом.
+// Описание: masonry-сетка скриншотов из мессенджера (CSS columns).
 // Впоследствии скриншоты будут загружаться через админ-дашборд.
-"use client";
-
-import { useCallback, useEffect, useRef } from "react";
 
 import Image from "next/image";
 
@@ -12,73 +9,12 @@ import { designTokens } from "@/src/lib/design-tokens";
 
 export function Testimonials() {
   const { testimonials, palette } = designTokens;
-  const trackRef = useRef<HTMLDivElement | null>(null);
-  const isDragging = useRef(false);
-  const startX = useRef(0);
-  const scrollLeft = useRef(0);
-
-  // Drag-скролл для удобной навигации на десктопе
-  const handlePointerDown = useCallback((e: React.PointerEvent) => {
-    const track = trackRef.current;
-    if (!track) return;
-    isDragging.current = true;
-    startX.current = e.clientX - track.offsetLeft;
-    scrollLeft.current = track.scrollLeft;
-    track.style.cursor = "grabbing";
-    track.setPointerCapture(e.pointerId);
-  }, []);
-
-  const handlePointerMove = useCallback((e: React.PointerEvent) => {
-    if (!isDragging.current || !trackRef.current) return;
-    e.preventDefault();
-    const x = e.clientX - trackRef.current.offsetLeft;
-    const walk = (x - startX.current) * 1.5;
-    trackRef.current.scrollLeft = scrollLeft.current - walk;
-  }, []);
-
-  const handlePointerUp = useCallback(() => {
-    isDragging.current = false;
-    if (trackRef.current) {
-      trackRef.current.style.cursor = "grab";
-    }
-  }, []);
-
-  // Автопрокрутка с паузой при hover/touch
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    let paused = false;
-    const pause = () => { paused = true; };
-    const resume = () => { paused = false; };
-
-    track.addEventListener("pointerenter", pause);
-    track.addEventListener("pointerleave", resume);
-
-    const interval = window.setInterval(() => {
-      if (paused || isDragging.current) return;
-      const maxScroll = track.scrollWidth - track.clientWidth;
-      if (track.scrollLeft >= maxScroll - 2) {
-        track.scrollTo({ left: 0, behavior: "smooth" });
-      } else {
-        track.scrollBy({ left: 320, behavior: "smooth" });
-      }
-    }, 3500);
-
-    return () => {
-      window.clearInterval(interval);
-      track.removeEventListener("pointerenter", pause);
-      track.removeEventListener("pointerleave", resume);
-    };
-  }, []);
 
   return (
-    <section id="testimonials" className="pb-24 pt-6">
-      {/* Заголовок остаётся в колонке max-w-7xl */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-8 max-w-3xl">
+    <section id="testimonials" className="px-4 pb-24 pt-6 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl">
+        {/* Заголовок */}
+        <div className="mb-10 max-w-3xl">
           <p
             className="text-sm font-semibold uppercase tracking-[0.26em]"
             style={{ color: palette.sky }}
@@ -92,37 +28,26 @@ export function Testimonials() {
             {testimonials.description}
           </p>
         </div>
-      </div>
 
-      {/* Карусель на всю ширину вьюпорта — иначе внутри max-w-7xl по бокам остаётся кремовый фон страницы */}
-      <div className="mt-8" style={{ backgroundColor: palette.background }}>
-        <div
-          ref={trackRef}
-          className="scrollbar-hide flex cursor-grab gap-2 overflow-x-auto px-4 pb-0 sm:gap-3 sm:px-6 lg:px-8"
-          style={{ scrollSnapType: "x mandatory" }}
-          onPointerDown={handlePointerDown}
-          onPointerMove={handlePointerMove}
-          onPointerUp={handlePointerUp}
-          onPointerCancel={handlePointerUp}
-        >
+        {/* Masonry-сетка: CSS columns для Pinterest-раскладки без JS */}
+        <div className="columns-1 gap-4 sm:columns-2 sm:gap-5 lg:columns-3 xl:columns-4">
           {testimonials.items.map((item, index) => (
             <div
               key={`testimonial-${index}`}
-              className="flex-none"
-              style={{ scrollSnapAlign: "start" }}
+              className="mb-4 break-inside-avoid sm:mb-5"
             >
               <div
-                className="relative h-[28rem] w-[18rem] overflow-hidden rounded-[2rem] shadow-soft sm:h-[32rem] sm:w-[20rem]"
-                style={{ backgroundColor: palette.background }}
+                className="overflow-hidden rounded-[1.5rem] shadow-soft"
+                style={{ backgroundColor: palette.white }}
               >
-                {/* Скриншот: в исходнике снизу часто чёрная полоса (системная зона) — origin-top + scale обрезаем низ */}
-                {/* Первые 2 изображения — priority для LCP, blur placeholder для premium UX */}
+                {/* Скриншот отображается целиком: w-full h-auto */}
                 <Image
                   src={withBasePath(item.src)}
                   alt={item.alt}
-                  fill
-                  className="origin-top scale-[1.08] object-cover object-left object-top sm:scale-[1.06]"
-                  sizes="(max-width: 640px) 18rem, 20rem"
+                  width={1080}
+                  height={1080}
+                  className="h-auto w-full"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
                   {...(index < 2 && {
                     priority: true,
                     placeholder: "blur" as const,
