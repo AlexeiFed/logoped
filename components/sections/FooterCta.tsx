@@ -66,6 +66,15 @@ export function FooterCta() {
                   {cookieConsent.linkLabel}
                 </Link>
               </p>
+              <p>
+                <Link
+                  href={withBasePath("/privacy")}
+                  className="font-medium underline underline-offset-2 transition-opacity hover:opacity-80"
+                  style={{ color: palette.sky }}
+                >
+                  {designTokens.privacyPolicy.linkLabel}
+                </Link>
+              </p>
             </div>
           </div>
         </div>
