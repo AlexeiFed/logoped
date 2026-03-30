@@ -80,13 +80,13 @@ export const designTokens = {
     // Только реальные скриншоты. Добавляйте новые записи по мере появления отзывов.
     items: [
       { src: "/images/testimonials/review-8.png", alt: "Отзыв родителя 1" },
-      { src: "/images/testimonials/review-6.webp", alt: "Отзыв родителя 1" },
-      { src: "/images/testimonials/review-5.webp", alt: "Отзыв родителя 1" },
-      { src: "/images/testimonials/review-4.webp", alt: "Отзыв родителя 1" },
-      { src: "/images/testimonials/review-3.webp", alt: "Отзыв родителя 1" },
-      { src: "/images/testimonials/review-2.webp", alt: "Отзыв родителя 1" },
-      { src: "/images/testimonials/review-7.webp", alt: "Отзыв родителя 1" },
-      { src: "/images/testimonials/review-1.webp", alt: "Отзыв родителя 1" },
+      { src: "/images/testimonials/review-6.jpg", alt: "Отзыв родителя 1" },
+      { src: "/images/testimonials/review-5.jpg", alt: "Отзыв родителя 1" },
+      { src: "/images/testimonials/review-4.jpg", alt: "Отзыв родителя 1" },
+      { src: "/images/testimonials/review-3.jpg", alt: "Отзыв родителя 1" },
+      { src: "/images/testimonials/review-2.jpg", alt: "Отзыв родителя 1" },
+      { src: "/images/testimonials/review-7.jpg", alt: "Отзыв родителя 1" },
+      { src: "/images/testimonials/review-1.jpg", alt: "Отзыв родителя 1" },
     ],
   },
   footer: {

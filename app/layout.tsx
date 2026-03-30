@@ -11,6 +11,8 @@ import "./globals.css";
 // Абсолютный URL превью для OG/Telegram; на GitHub Pages задаётся NEXT_PUBLIC_SITE_URL в CI.
 const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://annakorzhova.ru").replace(/\/$/, "");
 const ogImageUrl = `${siteUrl}/images/og-hero.jpg`;
+// basePath для static-ресурсов (favicon и т.д.), которые Next.js metadata не префиксит автоматически
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const plusJakarta = Plus_Jakarta_Sans({
   variable: "--font-dm-sans",
@@ -63,8 +65,8 @@ export const metadata: Metadata = {
     ],
   },
   icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
+    icon: `${basePath}/favicon.ico`,
+    apple: `${basePath}/apple-touch-icon.png`,
   },
 };
 
