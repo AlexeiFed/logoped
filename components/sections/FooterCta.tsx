@@ -3,7 +3,6 @@
 import Link from "next/link";
 
 import { PhoneIcon } from "@/components/icons/PhoneIcon";
-import { withBasePath } from "@/lib/base-path";
 import { designTokens } from "@/src/lib/design-tokens";
 
 export function FooterCta() {
@@ -59,7 +58,7 @@ export function FooterCta() {
               ))}
               <p className="pt-1">
                 <Link
-                  href={withBasePath("/cookies")}
+                  href="/cookies"
                   className="font-medium underline underline-offset-2 transition-opacity hover:opacity-80"
                   style={{ color: palette.sky }}
                 >
@@ -68,7 +67,7 @@ export function FooterCta() {
               </p>
               <p>
                 <Link
-                  href={withBasePath("/privacy")}
+                  href="/privacy"
                   className="font-medium underline underline-offset-2 transition-opacity hover:opacity-80"
                   style={{ color: palette.sky }}
                 >

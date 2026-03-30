@@ -5,7 +5,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-import { withBasePath } from "@/lib/base-path";
 import { designTokens } from "@/src/lib/design-tokens";
 
 export function CookieBanner() {
@@ -53,7 +52,7 @@ export function CookieBanner() {
           {cookieConsent.bannerLead}{" "}
           <span>(См. </span>
           <Link
-            href={withBasePath("/cookies")}
+            href="/cookies"
             className="font-semibold underline underline-offset-2 transition-opacity hover:opacity-80"
             style={{ color: palette.sky }}
           >
