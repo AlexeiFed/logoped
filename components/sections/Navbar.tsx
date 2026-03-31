@@ -107,8 +107,8 @@ export function Navbar() {
             aria-expanded={contactOpen}
             aria-label="Связаться"
           >
-            <PhoneIcon className="size-4 shrink-0" />
-            <span>Связаться</span>
+           <PhoneIcon className="size-4 shrink-0" />
+       {/*      <span>Связаться</span> */}
           </button>
 
           {contactOpen && (
