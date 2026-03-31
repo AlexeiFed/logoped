@@ -2,7 +2,7 @@
 // Описание: показывает основные якоря страницы и morph-эффект навбара при скролле.
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -15,24 +15,7 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   // На мобильной версии навбар появляется только после скролла вниз
   const [isMobileVisible, setIsMobileVisible] = useState(false);
-  // Мобильный dropdown для кнопок связи
-  const [contactOpen, setContactOpen] = useState(false);
-  const contactRef = useRef<HTMLDivElement>(null);
   const { footer, hero, palette } = designTokens;
-
-  // Закрытие dropdown при клике вне
-  const handleOutsideClick = useCallback((e: MouseEvent) => {
-    if (contactRef.current && !contactRef.current.contains(e.target as Node)) {
-      setContactOpen(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (contactOpen) {
-      document.addEventListener("pointerdown", handleOutsideClick);
-    }
-    return () => document.removeEventListener("pointerdown", handleOutsideClick);
-  }, [contactOpen, handleOutsideClick]);
 
   useEffect(() => {
     // Меняем состояние навбара по скроллу, чтобы он сжимался и становился более glassmorphic.
@@ -112,54 +95,15 @@ export function Navbar() {
           </Link>
         </div>
 
-        {/* Мобилка (< sm): одна кнопка → dropdown с иконками телефона и MAX */}
-        <div ref={contactRef} className="relative sm:hidden">
-          <button
-            type="button"
-            onClick={() => setContactOpen((prev) => !prev)}
-            className="inline-flex items-center rounded-full p-2.5 text-white shadow-soft transition-transform duration-300 hover:-translate-y-0.5"
-            style={{ backgroundColor: palette.teal }}
-            aria-expanded={contactOpen}
-            aria-label="Связаться"
-          >
-            <PhoneIcon className="size-5 shrink-0" />
-          </button>
-
-          {contactOpen && (
-            <div
-              className="absolute right-0 top-full z-50 mt-2 flex items-center gap-2 rounded-full border p-1.5 shadow-soft backdrop-blur-xl"
-              style={{
-                borderColor: `${palette.teal}26`,
-                backgroundColor: `${palette.background}f0`,
-              }}
-            >
-              <a
-                href={`tel:${footer.phoneTel}`}
-                className="inline-flex items-center justify-center rounded-full border border-ink/10 bg-white/60 p-2.5 transition-opacity hover:opacity-85"
-                style={{ color: palette.teal }}
-                aria-label="Позвонить"
-              >
-                <PhoneIcon className="size-5 shrink-0" />
-              </a>
-              <a
-                href={designTokens.footer.maxChatUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-full p-1 transition-transform duration-300 hover:-translate-y-0.5"
-                onClick={() => setContactOpen(false)}
-                aria-label="Написать в MAX"
-              >
-                <Image
-                  src={withBasePath("/images/max-messenger-sign-logo.png")}
-                  alt="MAX"
-                  width={36}
-                  height={36}
-                  className="size-9 rounded-full"
-                />
-              </a>
-            </div>
-          )}
-        </div>
+        {/* Мобилка (< sm): только иконка звонка */}
+        <a
+          href={`tel:${footer.phoneTel}`}
+          className="inline-flex items-center rounded-full p-2.5 text-white shadow-soft transition-transform duration-300 hover:-translate-y-0.5 sm:hidden"
+          style={{ backgroundColor: palette.teal }}
+          aria-label={`Позвонить: ${footer.phoneDisplay}`}
+        >
+          <PhoneIcon className="size-5 shrink-0" />
+        </a>
       </nav>
     </div>
   );
