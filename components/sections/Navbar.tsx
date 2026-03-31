@@ -141,22 +141,22 @@ export function Navbar() {
               >
                 <PhoneIcon className="size-5 shrink-0" />
               </a>
-              <Link
-                prefetch={false}
-                href="/#footer-cta"
-                className="inline-flex items-center justify-center rounded-full p-2.5 text-white transition-transform duration-300 hover:-translate-y-0.5"
-                style={{ backgroundColor: palette.teal }}
+              <a
+                href={designTokens.footer.maxChatUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-full p-1 transition-transform duration-300 hover:-translate-y-0.5"
                 onClick={() => setContactOpen(false)}
                 aria-label="Написать в MAX"
               >
                 <Image
                   src={withBasePath("/images/max-messenger-sign-logo.png")}
                   alt="MAX"
-                  width={20}
-                  height={20}
-                  className="size-5 rounded"
+                  width={36}
+                  height={36}
+                  className="size-9 rounded-full"
                 />
-              </Link>
+              </a>
             </div>
           )}
         </div>
