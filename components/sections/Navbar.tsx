@@ -15,6 +15,8 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   // На мобильной версии навбар появляется только после скролла вниз
   const [isMobileVisible, setIsMobileVisible] = useState(false);
+  // Мобильный dropdown для кнопок связи
+  const [contactOpen, setContactOpen] = useState(false);
   const { footer, hero, palette } = designTokens;
 
   useEffect(() => {
@@ -74,32 +76,76 @@ export function Navbar() {
           ))}
         </div>
 
-        <div className="flex flex-shrink-0 items-center gap-1.5 sm:gap-2">
+        {/* Десктоп (sm+): телефон + CTA видны всегда */}
+        <div className="hidden flex-shrink-0 items-center gap-2 sm:flex">
           <a
             href={`tel:${footer.phoneTel}`}
-            className="inline-flex items-center gap-1.5 rounded-full border border-ink/10 bg-white/50 px-2.5 py-2 text-ink transition-opacity hover:opacity-85 sm:px-3"
+            className="inline-flex items-center gap-1.5 rounded-full border border-ink/10 bg-white/50 px-3 py-2 text-ink transition-opacity hover:opacity-85"
             style={{ color: palette.teal }}
             aria-label={`Позвонить: ${footer.phoneDisplay}`}
           >
-            <PhoneIcon className="size-[1.15rem] shrink-0 sm:size-5" />
-            <span className="hidden text-xs font-semibold sm:inline sm:text-sm">{footer.phoneDisplay}</span>
+            <PhoneIcon className="size-5 shrink-0" />
+            <span className="text-sm font-semibold">{footer.phoneDisplay}</span>
           </a>
           <Link
             prefetch={false}
             href="/#footer-cta"
-            className="rounded-full px-3 py-2 text-xs font-semibold text-white shadow-soft transition-transform duration-300 hover:-translate-y-0.5 sm:px-5 sm:py-2.5 sm:text-sm"
+            className="rounded-full px-5 py-2.5 text-sm font-semibold text-white shadow-soft transition-transform duration-300 hover:-translate-y-0.5"
             style={{ backgroundColor: palette.teal }}
           >
-            {/* На мобилке — иконка Max, на sm+ — текст */}
-            <Image
-              src={withBasePath("/images/max-messenger-sign-logo.png")}
-              alt="Написать в MAX"
-              width={22}
-              height={22}
-              className="size-[22px] rounded sm:hidden"
-            />
-            <span className="hidden sm:inline">{hero.ctaPrimary}</span>
+            {hero.ctaPrimary}
           </Link>
+        </div>
+
+        {/* Мобилка (< sm): одна кнопка → dropdown с телефоном и MAX */}
+        <div className="relative sm:hidden">
+          <button
+            type="button"
+            onClick={() => setContactOpen((prev) => !prev)}
+            className="inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-xs font-semibold text-white shadow-soft transition-transform duration-300 hover:-translate-y-0.5"
+            style={{ backgroundColor: palette.teal }}
+            aria-expanded={contactOpen}
+            aria-label="Связаться"
+          >
+            <PhoneIcon className="size-4 shrink-0" />
+            <span>Связаться</span>
+          </button>
+
+          {contactOpen && (
+            <div
+              className="absolute right-0 top-full z-50 mt-2 flex min-w-[11rem] flex-col gap-2 rounded-2xl border p-2 shadow-soft backdrop-blur-xl"
+              style={{
+                borderColor: `${palette.teal}26`,
+                backgroundColor: `${palette.background}f0`,
+              }}
+            >
+              <a
+                href={`tel:${footer.phoneTel}`}
+                className="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-white/60 px-3 py-2.5 text-sm font-semibold transition-opacity hover:opacity-85"
+                style={{ color: palette.teal }}
+                onClick={() => setContactOpen(false)}
+              >
+                <PhoneIcon className="size-4 shrink-0" />
+                {footer.phoneDisplay}
+              </a>
+              <Link
+                prefetch={false}
+                href="/#footer-cta"
+                className="inline-flex items-center gap-2 rounded-full px-3 py-2.5 text-sm font-semibold text-white transition-transform duration-300 hover:-translate-y-0.5"
+                style={{ backgroundColor: palette.teal }}
+                onClick={() => setContactOpen(false)}
+              >
+                <Image
+                  src={withBasePath("/images/max-messenger-sign-logo.png")}
+                  alt="MAX"
+                  width={18}
+                  height={18}
+                  className="size-[18px] rounded"
+                />
+                Написать в MAX
+              </Link>
+            </div>
+          )}
         </div>
       </nav>
     </div>
