@@ -2,7 +2,7 @@
 // Описание: показывает основные якоря страницы и morph-эффект навбара при скролле.
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -17,7 +17,22 @@ export function Navbar() {
   const [isMobileVisible, setIsMobileVisible] = useState(false);
   // Мобильный dropdown для кнопок связи
   const [contactOpen, setContactOpen] = useState(false);
+  const contactRef = useRef<HTMLDivElement>(null);
   const { footer, hero, palette } = designTokens;
+
+  // Закрытие dropdown при клике вне
+  const handleOutsideClick = useCallback((e: MouseEvent) => {
+    if (contactRef.current && !contactRef.current.contains(e.target as Node)) {
+      setContactOpen(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (contactOpen) {
+      document.addEventListener("pointerdown", handleOutsideClick);
+    }
+    return () => document.removeEventListener("pointerdown", handleOutsideClick);
+  }, [contactOpen, handleOutsideClick]);
 
   useEffect(() => {
     // Меняем состояние навбара по скроллу, чтобы он сжимался и становился более glassmorphic.
@@ -97,23 +112,22 @@ export function Navbar() {
           </Link>
         </div>
 
-        {/* Мобилка (< sm): одна кнопка → dropdown с телефоном и MAX */}
-        <div className="relative sm:hidden">
+        {/* Мобилка (< sm): одна кнопка → dropdown с иконками телефона и MAX */}
+        <div ref={contactRef} className="relative sm:hidden">
           <button
             type="button"
             onClick={() => setContactOpen((prev) => !prev)}
-            className="inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-xs font-semibold text-white shadow-soft transition-transform duration-300 hover:-translate-y-0.5"
+            className="inline-flex items-center rounded-full p-2.5 text-white shadow-soft transition-transform duration-300 hover:-translate-y-0.5"
             style={{ backgroundColor: palette.teal }}
             aria-expanded={contactOpen}
             aria-label="Связаться"
           >
-           <PhoneIcon className="size-4 shrink-0" />
-       {/*      <span>Связаться</span> */}
+            <PhoneIcon className="size-5 shrink-0" />
           </button>
 
           {contactOpen && (
             <div
-              className="absolute right-0 top-full z-50 mt-2 flex min-w-[11rem] flex-col gap-2 rounded-2xl border p-2 shadow-soft backdrop-blur-xl"
+              className="absolute right-0 top-full z-50 mt-2 flex items-center gap-2 rounded-full border p-1.5 shadow-soft backdrop-blur-xl"
               style={{
                 borderColor: `${palette.teal}26`,
                 backgroundColor: `${palette.background}f0`,
@@ -121,28 +135,27 @@ export function Navbar() {
             >
               <a
                 href={`tel:${footer.phoneTel}`}
-                className="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-white/60 px-3 py-2.5 text-sm font-semibold transition-opacity hover:opacity-85"
+                className="inline-flex items-center justify-center rounded-full border border-ink/10 bg-white/60 p-2.5 transition-opacity hover:opacity-85"
                 style={{ color: palette.teal }}
-                onClick={() => setContactOpen(false)}
+                aria-label="Позвонить"
               >
-                <PhoneIcon className="size-4 shrink-0" />
-                {footer.phoneDisplay}
+                <PhoneIcon className="size-5 shrink-0" />
               </a>
               <Link
                 prefetch={false}
                 href="/#footer-cta"
-                className="inline-flex items-center gap-2 rounded-full px-3 py-2.5 text-sm font-semibold text-white transition-transform duration-300 hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center rounded-full p-2.5 text-white transition-transform duration-300 hover:-translate-y-0.5"
                 style={{ backgroundColor: palette.teal }}
                 onClick={() => setContactOpen(false)}
+                aria-label="Написать в MAX"
               >
                 <Image
                   src={withBasePath("/images/max-messenger-sign-logo.png")}
                   alt="MAX"
-                  width={18}
-                  height={18}
-                  className="size-[18px] rounded"
+                  width={20}
+                  height={20}
+                  className="size-5 rounded"
                 />
-                Написать в MAX
               </Link>
             </div>
           )}

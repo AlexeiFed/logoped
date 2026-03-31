@@ -50,7 +50,7 @@ export function Hero() {
     <section
       ref={sectionRef}
       id="hero"
-      className="relative flex min-h-[100dvh] items-center px-4 pb-12 pt-[9.5rem] sm:px-6 sm:pt-28 lg:px-8 lg:pt-24"
+      className="relative flex min-h-[100dvh] items-center px-4 pb-12 pt-16 sm:px-6 sm:pt-28 lg:px-8 lg:pt-24"
     >
       <div className="hero-wave" aria-hidden="true" />
       <div className="mx-auto grid w-full max-w-7xl gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
