@@ -10,6 +10,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://annakorzhova.ru/sitemap.xml",
+    sitemap: "https://24gelios.ru/sitemap.xml",
   };
 }
