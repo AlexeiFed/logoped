@@ -9,7 +9,7 @@ import { CookieBanner } from "@/components/CookieBanner";
 import "./globals.css";
 
 // Абсолютный URL превью для OG/Telegram; на GitHub Pages задаётся NEXT_PUBLIC_SITE_URL в CI.
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://annakorzhova.ru").replace(/\/$/, "");
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://24gelios.ru").replace(/\/$/, "");
 const ogImageUrl = `${siteUrl}/images/og-hero.jpg`;
 // basePath для static-ресурсов (favicon и т.д.), которые Next.js metadata не префиксит автоматически
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
