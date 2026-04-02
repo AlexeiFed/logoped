@@ -2,6 +2,7 @@
 // Описание: собирает Hero и секцию услуг в единую стартовую страницу.
 import { FooterCta } from "@/components/sections/FooterCta";
 import { Hero } from "@/components/sections/Hero";
+import { IntensiveCta } from "@/components/sections/IntensiveCta";
 import { Navbar } from "@/components/sections/Navbar";
 import { Philosophy } from "@/components/sections/Philosophy";
 import { SectionServices } from "@/components/sections/SectionServices";
@@ -15,6 +16,7 @@ export default function HomePage() {
       <Navbar />
       <Hero />
       <SectionServices />
+      <IntensiveCta />
       <Philosophy />
       <Testimonials />
       <FooterCta />
