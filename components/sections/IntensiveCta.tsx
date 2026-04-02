@@ -149,7 +149,7 @@ export function IntensiveCta() {
           {/* ===== Визуальный таймлайн ===== */}
           <div
             data-intensive-reveal
-            className="mt-10 inline-flex flex-wrap items-center gap-4 rounded-[2rem] bg-white/12 px-6 py-5 backdrop-blur-sm sm:gap-6"
+            className="mt-10 inline-flex flex-wrap items-center gap-4 rounded-[2rem] bg-white/12 px-0 py-5 backdrop-blur-sm sm:gap-6"
           >
             {/* До — тусклый */}
             <div className="text-center opacity-55">
@@ -238,15 +238,17 @@ export function IntensiveCta() {
                   data-intensive-reveal
                   className="rounded-[2rem] border border-white/12 bg-white/10 p-6 backdrop-blur-sm"
                 >
-                  <div
-                    className="mb-4 inline-flex size-11 items-center justify-center rounded-full"
-                    style={{ backgroundColor: `${palette.yellow}CC` }}
-                  >
-                    <Icon className="size-5 text-ink" />
+                  <div className="flex items-center gap-3">
+                    <div
+                      className="inline-flex size-11 shrink-0 items-center justify-center rounded-full"
+                      style={{ backgroundColor: `${palette.yellow}CC` }}
+                    >
+                      <Icon className="size-5 text-ink" />
+                    </div>
+                    <h3 className="text-lg font-bold text-white">
+                      {reason.heading}
+                    </h3>
                   </div>
-                  <h3 className="text-lg font-bold text-white">
-                    {reason.heading}
-                  </h3>
                   <p className="mt-2 text-sm leading-6 text-white/78">
                     {reason.text}
                   </p>
